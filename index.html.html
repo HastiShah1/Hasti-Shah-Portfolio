@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hasti Shah — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0f0f;
+    --gold: #c9a96e;
+    --gold-light: #e8d5b0;
+    --cream: #faf8f4;
+    --smoke: #f0ede6;
+    --mid: #6b6560;
+    --accent: #1a1a2e;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 4rem;
+    background: rgba(250,248,244,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,169,110,0.2);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 300; letter-spacing: 0.15em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2.5rem; }
+  .nav-links a {
+    font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--mid); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 8rem 4rem 4rem;
+    gap: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: 0; right: 0;
+    width: 50%; height: 100%;
+    background: var(--smoke);
+    z-index: 0;
+  }
+  .hero-text { position: relative; z-index: 1; }
+  .hero-tag {
+    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .hero-tag::before { content: ''; width: 2rem; height: 1px; background: var(--gold); }
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4rem, 8vw, 7rem);
+    font-weight: 300; line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+  h1 em { font-style: italic; color: var(--gold); }
+  .hero-desc {
+    font-size: 1rem; line-height: 1.7; color: var(--mid);
+    max-width: 42ch; margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn {
+    padding: 0.9rem 2rem;
+    font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+    text-decoration: none; transition: all 0.25s;
+    font-family: 'DM Sans', sans-serif; font-weight: 500;
+  }
+  .btn-primary {
+    background: var(--ink); color: var(--cream);
+  }
+  .btn-primary:hover { background: var(--gold); }
+  .btn-outline {
+    border: 1px solid var(--ink); color: var(--ink);
+  }
+  .btn-outline:hover { background: var(--ink); color: var(--cream); }
+
+  .hero-stats {
+    position: relative; z-index: 1;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+  }
+  .stat-card {
+    background: white; padding: 2.5rem 2rem;
+    opacity: 0; transform: translateY(20px);
+    animation: fadeUp 0.6s forwards;
+  }
+  .stat-card:nth-child(1) { animation-delay: 0.1s; }
+  .stat-card:nth-child(2) { animation-delay: 0.2s; background: var(--accent); }
+  .stat-card:nth-child(3) { animation-delay: 0.3s; background: var(--gold); }
+  .stat-card:nth-child(4) { animation-delay: 0.4s; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.2rem; font-weight: 300; line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+  .stat-card:nth-child(2) .stat-num,
+  .stat-card:nth-child(2) .stat-label { color: white; }
+  .stat-card:nth-child(3) .stat-num,
+  .stat-card:nth-child(3) .stat-label { color: var(--ink); }
+  .stat-label {
+    font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid);
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SECTIONS */
+  section { padding: 6rem 4rem; }
+  .section-tag {
+    font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .section-tag::before { content: ''; width: 2rem; height: 1px; background: var(--gold); }
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 300; line-height: 1.1; margin-bottom: 3rem;
+  }
+
+  /* BRANDS GRID */
+  .brands-section { background: var(--smoke); }
+  .brands-intro {
+    font-size: 1rem; color: var(--mid); max-width: 55ch;
+    line-height: 1.7; margin-bottom: 3rem; font-weight: 300;
+  }
+  .brands-grid {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+  }
+  .brand-pill {
+    padding: 0.5rem 1.2rem;
+    border: 1px solid rgba(15,15,15,0.15);
+    font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--ink); background: white;
+    transition: all 0.2s;
+  }
+  .brand-pill.luxury { border-color: var(--gold); background: rgba(201,169,110,0.08); }
+  .brand-pill:hover { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+
+  /* CAMPAIGNS */
+  .campaigns-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 2px;
+  }
+  .campaign-card {
+    background: white; padding: 2.5rem;
+    border-top: 3px solid transparent;
+    transition: border-color 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .campaign-card::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+    background: var(--gold); transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .campaign-card:hover::after { transform: scaleX(1); }
+  .campaign-card:hover { border-top-color: var(--gold); }
+  .campaign-sector {
+    font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.8rem;
+  }
+  .campaign-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; font-weight: 400; margin-bottom: 0.4rem;
+  }
+  .campaign-meta {
+    font-size: 0.75rem; color: var(--mid); margin-bottom: 1.2rem;
+  }
+  .campaign-points { list-style: none; }
+  .campaign-points li {
+    font-size: 0.85rem; color: var(--mid); line-height: 1.6;
+    padding: 0.3rem 0; border-bottom: 1px solid var(--smoke);
+    display: flex; gap: 0.6rem;
+  }
+  .campaign-points li::before { content: '→'; color: var(--gold); flex-shrink: 0; }
+  .campaign-highlight {
+    display: inline-block; margin-top: 1.2rem;
+    padding: 0.4rem 0.9rem;
+    background: var(--smoke);
+    font-size: 0.78rem; font-weight: 500; color: var(--ink);
+  }
+
+  /* METRICS STRIP */
+  .metrics-strip {
+    background: var(--accent);
+    padding: 5rem 4rem;
+  }
+  .metrics-strip h2 { color: white; }
+  .metrics-strip .section-tag { color: var(--gold-light); }
+  .metrics-strip .section-tag::before { background: var(--gold-light); }
+  .metrics-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 2px;
+  }
+  .metric-box {
+    background: rgba(255,255,255,0.05); padding: 2rem 1.5rem;
+    border: 1px solid rgba(255,255,255,0.08);
+    text-align: center;
+    transition: background 0.2s;
+  }
+  .metric-box:hover { background: rgba(201,169,110,0.15); }
+  .metric-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem; font-weight: 300; color: var(--gold);
+    display: block; line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .metric-label { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+
+  /* SERVICES */
+  .services-section { background: var(--smoke); }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2px;
+  }
+  .service-card {
+    background: white; padding: 2.5rem;
+  }
+  .service-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem; font-weight: 300; color: var(--gold-light);
+    line-height: 1; margin-bottom: 1rem;
+  }
+  .service-title {
+    font-size: 0.95rem; font-weight: 500; margin-bottom: 0.8rem; letter-spacing: 0.02em;
+  }
+  .service-desc { font-size: 0.85rem; color: var(--mid); line-height: 1.7; }
+
+  /* TESTIMONIALS */
+  .testimonials-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2px;
+  }
+  .testimonial-card {
+    background: var(--smoke); padding: 2.5rem;
+    border-left: 3px solid var(--gold);
+  }
+  .testimonial-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; font-style: italic; line-height: 1.7;
+    color: var(--ink); margin-bottom: 1.5rem;
+  }
+  .testimonial-source { font-size: 0.75rem; color: var(--mid); letter-spacing: 0.05em; }
+  .testimonial-source strong { color: var(--ink); display: block; margin-bottom: 0.2rem; font-style: normal; font-family: 'DM Sans'; }
+
+  /* MOODBOARDS */
+  .moodboards-section { background: var(--accent); }
+  .moodboards-section h2 { color: white; }
+  .moodboards-section .section-tag { color: var(--gold-light); }
+  .moodboards-section .section-tag::before { background: var(--gold-light); }
+  .moodboards-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+  }
+  .moodboard-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    transition: all 0.25s;
+    text-decoration: none;
+    display: block;
+  }
+  .moodboard-card:hover {
+    background: var(--gold);
+    border-color: var(--gold);
+  }
+  .moodboard-card:hover .moodboard-title,
+  .moodboard-card:hover .moodboard-sub { color: var(--ink); }
+  .moodboard-icon {
+    font-size: 2rem; margin-bottom: 1rem; display: block;
+  }
+  .moodboard-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 400; color: white;
+    margin-bottom: 0.4rem;
+  }
+  .moodboard-sub { font-size: 0.75rem; color: rgba(255,255,255,0.5); letter-spacing: 0.08em; text-transform: uppercase; }
+
+  .portfolio-cta {
+    margin-top: 3rem; text-align: center;
+  }
+  .portfolio-link {
+    display: inline-flex; align-items: center; gap: 0.8rem;
+    padding: 1rem 2.5rem;
+    background: var(--gold);
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500;
+    transition: background 0.2s;
+  }
+  .portfolio-link:hover { background: white; }
+
+  /* CONTACT */
+  .contact-section {
+    background: var(--ink); color: white;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6rem;
+    align-items: center;
+  }
+  .contact-section h2 { color: white; }
+  .contact-section .section-tag { color: var(--gold); }
+  .contact-section .section-tag::before { background: var(--gold); }
+  .contact-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300;
+    line-height: 1.2; color: white; margin-bottom: 2rem;
+  }
+  .contact-headline em { color: var(--gold); font-style: italic; }
+  .contact-details { display: flex; flex-direction: column; gap: 1.5rem; }
+  .contact-item { display: flex; gap: 1.2rem; align-items: flex-start; }
+  .contact-icon { color: var(--gold); font-size: 1rem; margin-top: 0.15rem; flex-shrink: 0; }
+  .contact-item-label { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 0.2rem; }
+  .contact-item-value { font-size: 0.9rem; color: white; }
+  .contact-item-value a { color: var(--gold-light); text-decoration: none; }
+  .availability {
+    margin-top: 2.5rem; padding: 1.2rem 1.5rem;
+    border: 1px solid rgba(201,169,110,0.3);
+    font-size: 0.75rem; color: rgba(255,255,255,0.6); line-height: 1.8;
+  }
+  .availability strong { color: var(--gold); }
+
+  /* AWARD BADGE */
+  .award-badge {
+    display: inline-flex; align-items: center; gap: 0.8rem;
+    padding: 0.7rem 1.3rem;
+    border: 1px solid rgba(201,169,110,0.4);
+    margin-top: 1.5rem;
+    font-size: 0.75rem; color: var(--gold-light);
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 2rem 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  footer p { font-size: 0.72rem; color: rgba(255,255,255,0.3); }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem; }
+    .hero::before { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .moodboards-grid { grid-template-columns: 1fr; }
+    .contact-section { grid-template-columns: 1fr; gap: 3rem; }
+    .metrics-strip { padding: 4rem 1.5rem; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Hasti Shah</a>
+  <div class="nav-links">
+    <a href="#brands">Brands</a>
+    <a href="#campaigns">Campaigns</a>
+    <a href="#results">Results</a>
+    <a href="#moodboards">Portfolio</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-tag">Influencer Marketing · Ad Operations · Social Media</div>
+    <h1>Hasti<br><em>Shah</em></h1>
+    <p class="hero-desc">
+      5+ years building campaigns that move people — from luxury fragrance launches in Mumbai to destination travel epics across Switzerland. Strategy, creators, and performance reporting in one person.
+    </p>
+    <div class="hero-cta">
+      <a href="https://bit.ly/4hPN10x" target="_blank" class="btn btn-primary">View Full Portfolio →</a>
+      <a href="#contact" class="btn btn-outline">Get In Touch</a>
+    </div>
+    <div class="award-badge">★ Rising Star — SHE unLTD Awards 2023</div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-card">
+      <div class="stat-num">30M+</div>
+      <div class="stat-label">Total Campaign Reach</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">43M+</div>
+      <div class="stat-label">Reel Views — Switzerland Tourism</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">85%</div>
+      <div class="stat-label">Campaign Success Rate</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">100+</div>
+      <div class="stat-label">Creators Managed</div>
+    </div>
+  </div>
+</section>
+
+<!-- BRANDS -->
+<section class="brands-section" id="brands">
+  <div class="section-tag">Brand Experience</div>
+  <h2>Selected<br>Brand Work</h2>
+  <p class="brands-intro">Premium campaigns across luxury, beauty, travel, gaming, wellness, fintech and entertainment — from intimate creator partnerships to 8-creator international productions.</p>
+  <div class="brands-grid">
+    <span class="brand-pill luxury">Gucci</span>
+    <span class="brand-pill luxury">Jimmy Choo</span>
+    <span class="brand-pill luxury">NYX Professional</span>
+    <span class="brand-pill luxury">Parcos Beauty</span>
+    <span class="brand-pill">Switzerland Tourism</span>
+    <span class="brand-pill">Red Bull Esports</span>
+    <span class="brand-pill">Sony Music</span>
+    <span class="brand-pill">Netflix</span>
+    <span class="brand-pill">Disney+</span>
+    <span class="brand-pill">Amazon Gaming</span>
+    <span class="brand-pill">JBL Quantum</span>
+    <span class="brand-pill">Fashion Nova</span>
+    <span class="brand-pill">Myntra</span>
+    <span class="brand-pill">Ajio</span>
+    <span class="brand-pill">Puma</span>
+    <span class="brand-pill">Nike</span>
+    <span class="brand-pill">Adidas</span>
+    <span class="brand-pill">H&M</span>
+    <span class="brand-pill">Calvin Klein</span>
+    <span class="brand-pill">McDonald's</span>
+    <span class="brand-pill">Paytm</span>
+    <span class="brand-pill">CRED</span>
+    <span class="brand-pill">Google Pay</span>
+    <span class="brand-pill">Plix Life</span>
+    <span class="brand-pill">Herbal Essences</span>
+  </div>
+</section>
+
+<!-- CAMPAIGNS -->
+<section id="campaigns">
+  <div class="section-tag">Case Studies</div>
+  <h2>Campaign<br>Highlights</h2>
+  <div class="campaigns-grid">
+
+    <div class="campaign-card">
+      <div class="campaign-sector">Travel · Destination</div>
+      <div class="campaign-title">Switzerland Tourism × DamnFam</div>
+      <div class="campaign-meta">2020 · 3+ Year Partnership · 8 Creators</div>
+      <ul class="campaign-points">
+        <li>Creator strategy & coordination for 8 DamnFam creators across premium Swiss destinations</li>
+        <li>6-day luxury itinerary: skydiving Interlaken, Mt. Titlis, chocolate workshops, FIFA Museum</li>
+        <li>Cross-platform execution: Instagram + YouTube + TikTok</li>
+        <li>Established long-term repeat partnership spanning 3+ years</li>
+      </ul>
+      <span class="campaign-highlight">43M+ Reel Views · 6.3M Likes · 2.7M YouTube Views</span>
+    </div>
+
+    <div class="campaign-card">
+      <div class="campaign-sector">Luxury · Beauty · Fragrance</div>
+      <div class="campaign-title">Gucci & Jimmy Choo — Parcos</div>
+      <div class="campaign-meta">2022–2024 · Multi-season · Luxury Fragrance</div>
+      <ul class="campaign-points">
+        <li>Multi-season luxury fragrance campaigns with gender-targeted creator strategies</li>
+        <li>Gucci Flora, Gucci Bloom, Gucci Guilty, Jimmy Choo I Want Choo & Man Aqua</li>
+        <li>Consistent luxury aesthetic across influencer and owned social channels</li>
+        <li>Party-ready to ocean-adventure lifestyle storytelling narratives</li>
+      </ul>
+      <span class="campaign-highlight">25% Engagement Uplift · Multi-million Instagram Reach</span>
+    </div>
+
+    <div class="campaign-card">
+      <div class="campaign-sector">Beauty · International</div>
+      <div class="campaign-title">NYX × Cirque du Soleil</div>
+      <div class="campaign-meta">2022 · Las Vegas International Launch</div>
+      <ul class="campaign-points">
+        <li>Managed 2 premium Indian creators representing India on a global stage in Las Vegas</li>
+        <li>Cross-cultural coordination for NYX Professional Makeup's exclusive global launch</li>
+        <li>Behind-the-scenes exclusive event coverage across Reels, Stories & highlights</li>
+        <li>Global launch support for $8–13 product range</li>
+      </ul>
+      <span class="campaign-highlight">International Creator Coordination · Global Campaign</span>
+    </div>
+
+    <div class="campaign-card">
+      <div class="campaign-sector">Music · Beauty Fusion</div>
+      <div class="campaign-title">Sony Music × Colorbar</div>
+      <div class="campaign-meta">2021–2022 · Multi-platform</div>
+      <ul class="campaign-points">
+        <li>Music-beauty creator crossover strategy synced to release timelines</li>
+        <li>Creator briefing aligned with music drop schedules for maximum impact</li>
+        <li>Multi-platform: Instagram Reels, Stories and YouTube</li>
+      </ul>
+      <span class="campaign-highlight">11M+ Instagram Views</span>
+    </div>
+
+    <div class="campaign-card">
+      <div class="campaign-sector">Gaming · Esports</div>
+      <div class="campaign-title">Red Bull Esports · Amazon Gaming · JBL</div>
+      <div class="campaign-meta">2020–2022 · Gaming & Tech</div>
+      <ul class="campaign-points">
+        <li>Multi-platform activations across YouTube, Instagram & TikTok</li>
+        <li>Live event & tournament creator coverage for Red Bull Esports India</li>
+        <li>Product launch seeding & unboxing campaigns for JBL Quantum & Amazon Gaming</li>
+        <li>Community-first content strategy for esports audience</li>
+      </ul>
+      <span class="campaign-highlight">5M+ Estimated Impressions</span>
+    </div>
+
+    <div class="campaign-card">
+      <div class="campaign-sector">Wellness · Fintech</div>
+      <div class="campaign-title">Plix Life · Paytm · CRED · Google Pay</div>
+      <div class="campaign-meta">2019–2024 · Wellness & Digital Payments</div>
+      <ul class="campaign-points">
+        <li>Authentic health transformation storytelling through fitness & nutrition creators</li>
+        <li>Credibility-first creator selection prioritising audience trust</li>
+        <li>Diwali & festive season influencer campaigns at scale for fintech brands</li>
+        <li>Cashback & offer-led content driving app discoverability across platforms</li>
+      </ul>
+      <span class="campaign-highlight">Multi-platform · Instagram · YouTube · Snapchat</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- METRICS -->
+<section class="metrics-strip" id="results">
+  <div class="section-tag">Proof of Performance</div>
+  <h2 style="color:white;margin-bottom:3rem;">Results<br>That Matter</h2>
+  <div class="metrics-grid">
+    <div class="metric-box">
+      <span class="metric-num">30M+</span>
+      <span class="metric-label">Total Campaign Reach</span>
+    </div>
+    <div class="metric-box">
+      <span class="metric-num">43M+</span>
+      <span class="metric-label">Reel Views (Switzerland)</span>
+    </div>
+    <div class="metric-box">
+      <span class="metric-num">11M+</span>
+      <span class="metric-label">Instagram Views (Sony)</span>
+    </div>
+    <div class="metric-box">
+      <span class="metric-num">85%</span>
+      <span class="metric-label">Campaign Success Rate</span>
+    </div>
+    <div class="metric-box">
+      <span class="metric-num">40%</span>
+      <span class="metric-label">Cost Optimization</span>
+    </div>
+    <div class="metric-box">
+      <span class="metric-num">40%</span>
+      <span class="metric-label">Client Retention Uplift</span>
+    </div>
+    <div class="metric-box">
+      <span class="metric-num">25%</span>
+      <span class="metric-label">Engagement Uplift (Gucci)</span>
+    </div>
+    <div class="metric-box">
+      <span class="metric-num">20+</span>
+      <span class="metric-label">Simultaneous Campaigns</span>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-section">
+  <div class="section-tag">What I Deliver</div>
+  <h2>Services &<br>Capabilities</h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-num">01</div>
+      <div class="service-title">Influencer Campaign Strategy</div>
+      <div class="service-desc">End-to-end planning from brand discovery to creator matching, briefing and launch roadmap across all tiers.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">02</div>
+      <div class="service-title">Creator Discovery & Management</div>
+      <div class="service-desc">Vetting 100+ creators by niche fit, engagement rate and audience quality. Contracts, negotiation and timeline management.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">03</div>
+      <div class="service-title">Ad Account Management</div>
+      <div class="service-desc">Meta Ads Manager, TikTok Ads Manager and LinkedIn Campaign Manager — account setup, governance, pixel tracking and reporting.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">04</div>
+      <div class="service-title">Creative Direction & Moodboards</div>
+      <div class="service-desc">Visual briefs, content guidelines and aesthetic direction that protect brand identity and elevate creator output.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">05</div>
+      <div class="service-title">Campaign Execution & Monitoring</div>
+      <div class="service-desc">Real-time oversight of content approvals, posting schedules, live performance and platform compliance.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">06</div>
+      <div class="service-title">Reporting & Optimisation</div>
+      <div class="service-desc">Data-led post-campaign reports with UTM tracking, actionable insights and recommendations for next-cycle improvement.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section>
+  <div class="section-tag">Social Proof</div>
+  <h2>What Clients<br>Say</h2>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="testimonial-quote">"Hasti's work on our Switzerland Tourism campaign was exceptional. Her ability to coordinate 8 creators across a 6-day itinerary while maintaining consistent quality and brand storytelling was remarkable. The results — 43M+ reel views — speak for themselves."</div>
+      <div class="testimonial-source">
+        <strong>Campaign Director</strong>
+        Switzerland Tourism / DamnFam Campaign
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-quote">"What sets Hasti apart is her genuine understanding of luxury brand positioning. Every creator she selected for our Parcos campaigns truly reflected the essence of Gucci and Jimmy Choo. Our engagement uplift of 25% exceeded all expectations."</div>
+      <div class="testimonial-source">
+        <strong>Brand Manager</strong>
+        Parcos Beauty India
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-quote">"Managing an international Las Vegas activation remotely is no small feat. Hasti handled everything — creator coordination, real-time content coverage, brand alignment — flawlessly. The campaign was a standout moment for NYX in India."</div>
+      <div class="testimonial-source">
+        <strong>Marketing Lead</strong>
+        NYX Professional Makeup × Nykaa
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MOODBOARDS / PORTFOLIO -->
+<section class="moodboards-section" id="moodboards">
+  <div class="section-tag">Creative Work</div>
+  <h2 style="color:white;">Creative Moodboards<br>&amp; Portfolio</h2>
+  <div class="moodboards-grid">
+    <a href="https://bit.ly/3JLlqAX" target="_blank" class="moodboard-card">
+      <span class="moodboard-icon">✦</span>
+      <div class="moodboard-title">Gucci</div>
+      <div class="moodboard-sub">Luxury Beauty · Moodboard</div>
+    </a>
+    <a href="https://bit.ly/43WpepF" target="_blank" class="moodboard-card">
+      <span class="moodboard-icon">✦</span>
+      <div class="moodboard-title">Herbal Essences</div>
+      <div class="moodboard-sub">Beauty · Campaign Brief</div>
+    </a>
+    <a href="https://bit.ly/47ycHet" target="_blank" class="moodboard-card">
+      <span class="moodboard-icon">✦</span>
+      <div class="moodboard-title">Music Promotion</div>
+      <div class="moodboard-sub">Entertainment · Strategy</div>
+    </a>
+  </div>
+  <div class="portfolio-cta">
+    <a href="https://bit.ly/4hPN10x" target="_blank" class="portfolio-link">
+      ↗ View Full Portfolio on Google Drive
+    </a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div>
+    <div class="section-tag">Get In Touch</div>
+    <div class="contact-headline">Ready to elevate<br>your <em>brand</em>?</div>
+    <p style="color:rgba(255,255,255,0.5);font-size:0.9rem;line-height:1.7;max-width:38ch;">Let's build campaigns that deliver real results. Available for full-time, freelance, contract and remote roles across international markets.</p>
+    <div class="availability">
+      <strong>Open to:</strong> Full-time · Freelance · Contract · Remote · International<br>
+      <strong>Location:</strong> Warsaw, Poland — Unlimited Work Permit<br>
+      <strong>Sectors:</strong> Luxury · Beauty · Fashion · Travel · Gaming · Wellness · Fintech
+    </div>
+  </div>
+  <div class="contact-details">
+    <div class="contact-item">
+      <span class="contact-icon">✉</span>
+      <div>
+        <div class="contact-item-label">Email</div>
+        <div class="contact-item-value"><a href="mailto:141hasti@gmail.com">141hasti@gmail.com</a></div>
+      </div>
+    </div>
+    <div class="contact-item">
+      <span class="contact-icon">☎</span>
+      <div>
+        <div class="contact-item-label">Phone / WhatsApp</div>
+        <div class="contact-item-value">+48 739 409 516</div>
+      </div>
+    </div>
+    <div class="contact-item">
+      <span class="contact-icon">◈</span>
+      <div>
+        <div class="contact-item-label">LinkedIn</div>
+        <div class="contact-item-value"><a href="https://linkedin.com/in/hastirshah" target="_blank">linkedin.com/in/hastirshah</a></div>
+      </div>
+    </div>
+    <div class="contact-item">
+      <span class="contact-icon">◉</span>
+      <div>
+        <div class="contact-item-label">Portfolio</div>
+        <div class="contact-item-value"><a href="https://bit.ly/4hPN10x" target="_blank">bit.ly/4hPN10x</a></div>
+      </div>
+    </div>
+    <div class="contact-item">
+      <span class="contact-icon">⌖</span>
+      <div>
+        <div class="contact-item-label">Location</div>
+        <div class="contact-item-value">Warsaw, Poland — Unlimited Work Permit</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Hasti Shah — Influencer Marketing Strategist & Ad Operations Specialist</p>
+  <p>Warsaw, Poland · Open to International Opportunities</p>
+</footer>
+
+</body>
+</html>
